@@ -6,28 +6,34 @@ module Resourceable
       module ClassMethods 
         def crud(options = {})
           cattr_accessor :strong_params
-          cattr_accessor :class_name
+          cattr_accessor :cancan_options
+          cattr_accessor :search_param
           
-          self.strong_params  = options.fetch(:permitted, nil)
-          self.class_name     = options.fetch(:class, nil)
+          self.strong_params  = options.fetch(:permitted, [])
+          self.cancan_options = options.fetch(:cancan, {})
+          self.search_param   = options.fetch(:q, :q)
 
           include Resourceable::Controllers::CRUD::InstanceMethods
         end
       end
-
+      
       module InstanceMethods 
-        load_and_authorize_resource resource_name: :resource 
-
+        load_and_authorize_resource self.cancan_options
 
         def index 
-          @search = @resources.search(search_params)
-          @resources = @search.result
+          @search = collection_instance.search(search_params)
+          collection_instance = @search.result
         end 
 
         def new 
         end 
 
         def create 
+          if resource_instance.save
+            # flash messages and shit
+          else 
+
+          end
         end 
 
         def edit 
@@ -41,10 +47,13 @@ module Resourceable
 
         private 
 
-        def model 
-          https://github.com/mrhazel/resourceable
+        def search_params 
+          params.permit(self.class.search_param)
         end
 
+        def resource_params 
+          params.require(instance_name.to_sym).permit(self.class.strong_params)
+        end
       end
     end
   end

@@ -2,4 +2,4 @@
 
 * TESTS!
 * better way of accessing cancan protected methods (`collection_instance`, `resource_instance`)
-* pagination
+* simple_form - how to handled deep nested associations

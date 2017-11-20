@@ -61,6 +61,10 @@ module Resourceable
 
         private 
 
+        def flash_interpolation_options
+          { resource_name: resource_instance.class }
+        end
+
         def collection_instance!(collection)
           send(:collection_instance=, collection)
         end

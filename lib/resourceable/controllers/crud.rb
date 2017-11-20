@@ -18,11 +18,20 @@ module Resourceable
       end
       
       module InstanceMethods 
-        load_and_authorize_resource self.cancan_options
+        extend ActiveSupport::Concern 
 
+        included do 
+          load_and_authorize_resource self.cancan_options
+        end
+
+        with_options to: :cancan_resource, prefix: false do |controller|
+          controller.delegate :collection_instance, :collection_instance=, 
+                              :resource_instance, :resource_instance=
+        end
+        
         def index 
           @search = collection_instance.search(search_params)
-          collection_instance = @search.result
+          collection_instance! @search.result
         end 
 
         def new 
@@ -30,7 +39,7 @@ module Resourceable
 
         def create 
           if resource_instance.save
-            # flash messages and shit
+          
           else 
 
           end
@@ -47,8 +56,16 @@ module Resourceable
 
         private 
 
+        def collection_instance!(collection)
+          send(:collection_instance=, collection)
+        end
+
+        def cancan_resource 
+          @cancan ||= self.class.cancan_resource_class.new(self)
+        end
+
         def search_params 
-          params.permit(self.class.search_param)
+          params.fetch(self.class.search_param, {})
         end
 
         def resource_params 

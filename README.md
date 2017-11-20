@@ -79,10 +79,7 @@ Pagination can be configured through the `pagination` option. Everything else is
 
 ```ruby 
 class UsersController < ApplicationController 
-  crud permitted: [ # strong params (default to {})
-    :email, :password 
-    ], 
-    pagination: {
+  crud pagination: {
       param: :user_page, # default is :page, 
       per: 10, # default is 20
     }

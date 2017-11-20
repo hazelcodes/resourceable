@@ -3,9 +3,9 @@ Replaces the need for scaffolded controllers while not restricting the developer
 
 ## Dependencies 
 
-* CanCanCan - loading and authorizing resource
-* Ransack   - searching and sorting
-* Kaminari  - pagination
+* [CanCanCan](https://github.com/CanCanCommunity/cancancan) - loading and authorizing resource
+* [Ransack](https://github.com/activerecord-hackery/ransack)   - searching and sorting
+* [Kaminari](https://github.com/kaminari/kaminari)  - pagination
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -80,8 +80,8 @@ Pagination can be configured through the `pagination` option. Everything else is
 ```ruby 
 class UsersController < ApplicationController 
   crud pagination: {
-      param: :user_page, # default is :page, 
-      per: 10, # default is 20
+      param: :user_page,  # default is :page, 
+      per: 10,            # default is 20
     }
 end
 ```

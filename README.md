@@ -1,5 +1,5 @@
 # Resourceable
-Replaces the need for scaffolded controllers while note restricting the developer.
+Replaces the need for scaffolded controllers while not restricting the developer.
 
 ## Dependencies 
 

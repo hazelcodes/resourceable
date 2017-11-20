@@ -5,6 +5,7 @@ require 'resourceable/controllers/crud'
 require 'cancancan'
 require 'ransack'
 require 'kaminari'
+require 'responders'
 
 
 # patches

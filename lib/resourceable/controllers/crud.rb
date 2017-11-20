@@ -21,12 +21,15 @@ module Resourceable
         extend ActiveSupport::Concern 
 
         included do 
+          respond_to :html, :json
+
           load_and_authorize_resource self.cancan_options
         end
 
         with_options to: :cancan_resource, prefix: false do |controller|
           controller.delegate :collection_instance, :collection_instance=, 
-                              :resource_instance, :resource_instance=
+                              :resource_instance, :resource_instance=,
+                              :instance_name
         end
         
         def index 
@@ -39,7 +42,7 @@ module Resourceable
 
         def create 
           if resource_instance.save
-          
+            
           else 
 
           end
@@ -49,6 +52,11 @@ module Resourceable
         end 
 
         def update 
+          if resoource_instance.save 
+
+          else 
+
+          end
         end 
 
         def destroy
@@ -58,6 +66,10 @@ module Resourceable
 
         def collection_instance!(collection)
           send(:collection_instance=, collection)
+        end
+
+        def resource_instance!(resource)
+          send(:resource_instance=, resource)
         end
 
         def cancan_resource 

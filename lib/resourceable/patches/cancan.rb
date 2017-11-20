@@ -6,5 +6,6 @@ module CanCan
     public :collection_instance= 
     public :resource_instance 
     public :resource_instance=
+    public :instance_name
   end
 end

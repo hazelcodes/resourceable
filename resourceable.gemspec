@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancancan', '~> 2.0'
   s.add_dependency 'kaminari',  '~> 1.1.1'
   s.add_dependency 'ransack',   '~> 1.8.4'
-
+  s.add_dependency 'responders','~> 2.4.0
+  '
   s.add_development_dependency "sqlite3"
 end

@@ -5,11 +5,12 @@ module Resourceable
       # f.input :subscriptions, as: :has_many
 
       def input 
-        @builder.simple_fields_for attribute_name do |ff|
-          association_attributes.each do |association_name|
-            f.input association_name
-          end
+        output = ActiveSupport::SafeBuffer.new 
+
+        output << @builder.simple_fields_for(attribute_name )do |ff|
+          ff.input(:id, as: :hidden) + build_inputs(ff).join.html_safe
         end
+        output
       end
 
       private 
@@ -19,11 +20,17 @@ module Resourceable
       end
 
       def association_class
-        building_on.reflect_on_association(attribute_name).class_name.safe_constantize
+        building_on.class.reflect_on_association(attribute_name).class_name.safe_constantize
       end
       
       def association_attributes 
-        association_class.attribute_names.map(&:to_sym)
+        association_class.attribute_names.map(&:to_sym) - association_class.skipped_inputs
+      end
+
+      def build_inputs(form_object)
+        association_attributes.map do |association_name|
+          form_object.input association_name
+        end
       end
     end
   end

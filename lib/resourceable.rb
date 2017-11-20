@@ -12,6 +12,7 @@ require 'resourceable/patches/cancan'
 
 # our files
 require 'resourceable/controllers/crud'
+require 'resourceable/models/form_builder'
 
 # simple_form inputs 
 require 'resourceable/inputs/has_many'

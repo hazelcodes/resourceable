@@ -1,6 +1,6 @@
 module Resourceable 
   module Models 
-    class FormBuilder 
+    module FormBuilder 
       extend ActiveSupport::Concern
 
       module ClassMethods 
@@ -8,11 +8,25 @@ module Resourceable
           cattr_accessor :skipped_inputs 
           self.skipped_inputs = (attributes || []).map(&:to_sym)
 
-          include Resourceable::Models::FormBuilder::InstanceMethods
+          include_once Resourceable::Models::FormBuilder::InstanceMethods
+        end
+
+        def hidden_inputs(*attributes)
+
+        end
+
+        private 
+
+        def include_once(module_name)
+          unless self.included_modules.include?(module_name)
+            include module_name 
+          end
         end
       end
 
       module InstanceMethods 
+        extend ActiveSupport::Concern
+
         def skipped_inputs
           self.class.skipped_inputs
         end

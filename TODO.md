@@ -1,4 +1,4 @@
 # TODO/NOTES
 
 * TESTS!
-* handling redirects.  force a convention, or provide configuration? what about using Responders with an option to provide the responder?
+* better way of accessing cancan protected methods (`collection_instance`, `resource_instance`)

@@ -35,31 +35,28 @@ module Resourceable
         def index 
           @search = collection_instance.search(search_params)
           collection_instance! @search.result
+          respond_with collection_instance
         end 
 
         def new 
         end 
 
         def create 
-          if resource_instance.save
-            
-          else 
-
-          end
+          resource_instance.save
+          respond_with resource_instance
         end 
 
         def edit 
         end 
 
         def update 
-          if resoource_instance.save 
-
-          else 
-
-          end
+          resource_instance.save 
+          respond_with resource_instance
         end 
 
         def destroy
+          resource_instance.destroy 
+          respond_with resource_instance
         end
 
         private 

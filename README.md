@@ -72,6 +72,23 @@ end
 
 ```
 
+### Pagination 
+
+Pagination can be configured through the `pagination` option. Everything else is just plain Kaminari.
+
+
+```ruby 
+class UsersController < ApplicationController 
+  crud permitted: [ # strong params (default to {})
+    :email, :password 
+    ], 
+    pagination: {
+      param: :user_page, # default is :page, 
+      per: 10, # default is 20
+    }
+end
+```
+
 ## Contributing
 Contribution directions go here.
 

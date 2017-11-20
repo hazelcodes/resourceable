@@ -8,12 +8,21 @@ module Resourceable
           cattr_accessor :strong_params
           cattr_accessor :cancan_options
           cattr_accessor :search_param
+          cattr_accessor :pagination_params
           
-          self.strong_params  = options.fetch(:permitted, [])
-          self.cancan_options = options.fetch(:cancan, {})
-          self.search_param   = options.fetch(:q, :q)
+          self.strong_params      = options.fetch(:permitted, [])
+          self.cancan_options     = options.fetch(:cancan, {})
+          self.search_param       = options.fetch(:q, :q)
+          self.pagination_params  = pagination_defaults.merge(options.fetch(:pagination, {}))
+          
 
           include Resourceable::Controllers::CRUD::InstanceMethods
+        end
+
+        private 
+
+        def pagination_defaults 
+          { param: :page, per: 20 }
         end
       end
       
@@ -34,9 +43,12 @@ module Resourceable
         
         def index 
           @search = collection_instance.search(search_params)
-          collection_instance! @search.result
+          collection_instance! @search.result.page(page_params).per(pagination.per)
           respond_with collection_instance
         end 
+
+        def show 
+        end
 
         def new 
         end 
@@ -50,7 +62,7 @@ module Resourceable
         end 
 
         def update 
-          resource_instance.save 
+          resource_instance.update_attributes(resource_params) 
           respond_with resource_instance
         end 
 
@@ -62,7 +74,29 @@ module Resourceable
         private 
 
         def flash_interpolation_options
-          { resource_name: resource_instance.class }
+          { resource_name: resource_instance.class.to_s }
+        end
+
+        def page_params 
+          params.fetch(pagination.param, nil)
+        end
+
+        def search_params 
+          params.fetch(self.class.search_param, {})
+        end
+
+        def resource_params 
+          params.require(instance_name.to_sym).permit(self.class.strong_params)
+        end
+
+        def pagination 
+          OpenStruct.new(self.class.pagination_params)
+        end
+
+        protected 
+
+        def cancan_resource 
+          @cancan ||= self.class.cancan_resource_class.new(self)
         end
 
         def collection_instance!(collection)
@@ -73,17 +107,6 @@ module Resourceable
           send(:resource_instance=, resource)
         end
 
-        def cancan_resource 
-          @cancan ||= self.class.cancan_resource_class.new(self)
-        end
-
-        def search_params 
-          params.fetch(self.class.search_param, {})
-        end
-
-        def resource_params 
-          params.require(instance_name.to_sym).permit(self.class.strong_params)
-        end
       end
     end
   end

@@ -11,7 +11,7 @@ module Resourceable
 
       def kaminari 
         generate 'kaminari:config'
-        generate 'kaminari:views default'
+        generate 'kaminari:views -e slim'
       end
     end
   end

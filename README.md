@@ -13,8 +13,15 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'resourceable'
 ```
+
+
 ## Usage
 
+Run the installer.  Resourceable will also run the installers for Kaminari, CanCan and Responders.
+
+```
+rails g resourceable:install
+```
 
 ### CRUD 
 Replaces the need for scaffolded controller code.  You will still need too create the views (for now).

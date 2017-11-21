@@ -3,8 +3,7 @@ Replaces the need for scaffolded controllers while not restricting the developer
 
 ## Live Stream
 
-I've been live streaming the creation of this gem over on [Twitch](http://twitch.tv/jasonhazel).  Videos are also posted to a [YouTube Playlist]
-(https://www.youtube.com/playlist?list=PLi4UprHLU91BUYH1B5QMaRJnpP7vQzgu6)
+I've been live streaming the creation of this gem over on [Twitch](http://twitch.tv/jasonhazel).  Videos are also posted to a [YouTube Playlist](https://www.youtube.com/playlist?list=PLi4UprHLU91BUYH1B5QMaRJnpP7vQzgu6)
 ## Dependencies 
 
 * [CanCanCan](https://github.com/CanCanCommunity/cancancan) - loading and authorizing resource

@@ -24,7 +24,7 @@ module Resourceable
       end
       
       def association_attributes 
-        association_class.attribute_names.map(&:to_sym) - association_class.skipped_inputs
+        association_class.attribute_names.map(&:to_sym) - (association_class.try(:skipped_inputs) || [])
       end
 
       def build_inputs(form_object)

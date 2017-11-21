@@ -93,7 +93,7 @@ end
 
 #### has_many 
 
-Resourceable adds a new SimpleForm input of `has_many` to simplify `has_many` associations. Resourceable will use the provided partial to display the associated objects.
+Resourceable adds a new SimpleForm input of `has_many` to simplify `has_many` associations. Resourceable will use the provided partial to display the associated objects. Don't forget to update the `permitted` params in your controller for the nested attributes.
 
 ```ruby 
 class Task < ApplicationRecord 

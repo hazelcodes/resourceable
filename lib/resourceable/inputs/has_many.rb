@@ -3,6 +3,10 @@ module Resourceable
   module Inputs
     class HasManyInput < SimpleForm::Inputs::Base 
       def input 
+        unless partial 
+          # TODO: Implement proper exceptions.
+          raise 'You must specify a partial for `has_many` inputs.'
+        end
         output = ActiveSupport::SafeBuffer.new 
 
         output << @builder.simple_fields_for(attribute_name )do |ff|

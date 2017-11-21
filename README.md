@@ -108,8 +108,14 @@ end
 ```
 
 ```slim 
+/ app/views/tasks/_form.slim
 = simple_form_for @task do |f|
   = f.input :details, as: :has_many, partial: 'tasks/detail_fields'
+```
+
+```slim 
+/ app/views/tasks/_detail_fields.slim
+= form_object.input :body
 ```
 
 

@@ -89,6 +89,30 @@ class UsersController < ApplicationController
 end
 ```
 
+### SimpleForm Inputs 
+
+#### has_many 
+
+Resourceable adds a new SimpleForm input of `has_many` to simplify `has_many` associations. Resourceable will use the provided partial to display the associated objects.
+
+```ruby 
+class Task < ApplicationRecord 
+  has_many :details 
+  accepts_nested_attributes_for :details
+end
+
+class Detail < ApplicationRecord 
+  belongs_to :task
+end
+
+```
+
+```slim 
+= simple_form_for @task do |f|
+  = f.input :details, as: :has_many, partial: 'tasks/detail_fields'
+```
+
+
 ## Contributing
 Contribution directions go here.
 

@@ -1,15 +1,13 @@
 $:.push File.expand_path("../lib", __FILE__)
 
-# Maintain your gem's version:
 require "resourceable/version"
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "resourceable"
   s.version     = Resourceable::VERSION
   s.authors     = ["Jason Hazel"]
-  s.email       = ["me@jasonhazel.com"]
-  s.homepage    = "https://github.com/mrhazel/resourceable"
+  s.email       = ["jason@hazel.codes"]
+  s.homepage    = "https://github.com/jasonhazel/resourceable"
   s.summary     = "Simplify CRUD"
   s.description = "Better than scaffolds"
   s.license     = "MIT"
@@ -21,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari',    '~> 1.1.1'
   s.add_dependency 'ransack',     '~> 1.8.4'
   s.add_dependency 'responders',  '~> 2.4.0'
-  s.add_dependency 'slim' #        '~> 3.0.9'
+  s.add_dependency 'slim' 
   s.add_dependency 'simple_form', '~> 3.5.0'
   
   s.add_development_dependency "sqlite3"

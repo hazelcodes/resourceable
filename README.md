@@ -57,7 +57,7 @@ end
 
 ```
 
-And of the regular CRUD actions can be done as one normally would.  If you need some custom handling of resource creation, just define it. Resourceable will still handle any actions you haven't defined.
+Any of the regular CRUD actions can be done as one normally would.  If you need some custom handling of resource creation, just define it. Resourceable will still handle any actions you haven't defined.
 
 ```ruby 
 class UsersController < ApplicationController 

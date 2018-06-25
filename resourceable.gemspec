@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Resourceable::VERSION
   s.authors     = ["Jason Hazel"]
   s.email       = ["jason@hazel.codes"]
-  s.homepage    = "https://github.com/jasonhazel/resourceable"
+  s.homepage    = "https://github.com/hazelcodes/resourceable"
   s.summary     = "Simplify CRUD"
   s.description = "Better than scaffolds"
   s.license     = "MIT"

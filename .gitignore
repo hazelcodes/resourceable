@@ -9,3 +9,4 @@ id_rsa
 .gitconfig
 Vagrantfile
 /.vagrant
+*.gem

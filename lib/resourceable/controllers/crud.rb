@@ -48,6 +48,7 @@ module Resourceable
         end 
 
         def show 
+          respond_with resource_instance
         end
 
         def new 
